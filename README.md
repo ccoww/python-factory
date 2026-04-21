@@ -29,7 +29,44 @@
   - `create_pizza(...)` 作为扩展点交由 `NYPizzaStore` / `ChicagoPizzaStore` 实现；
   - 同一 `pizza_type="cheese"` 在不同门店返回不同具体产品，体现“创建延迟到子类”。
 
+### 1.5 Mermaid 简易类图
 
+```mermaid
+classDiagram
+    class Pizza {
+      <<abstract>>
+      +name: str
+      +prepare()
+      +bake()
+      +cut()
+      +box()
+    }
+
+    class NYStyleCheesePizza
+    class ChicagoStyleCheesePizza
+
+    Pizza <|-- NYStyleCheesePizza
+    Pizza <|-- ChicagoStyleCheesePizza
+
+    class PizzaStore {
+      <<abstract>>
+      +order_pizza(pizza_type) Pizza
+      +create_pizza(pizza_type) Pizza*
+    }
+
+    class NYPizzaStore {
+      +create_pizza(pizza_type) Pizza
+    }
+    class ChicagoPizzaStore {
+      +create_pizza(pizza_type) Pizza
+    }
+
+    PizzaStore <|-- NYPizzaStore
+    PizzaStore <|-- ChicagoPizzaStore
+    PizzaStore ..> Pizza : creates
+```
+
+---
 
 ## 2. 示例故事与代码映射
 
@@ -104,5 +141,8 @@ Joel ordered a Chicago Deep Dish Cheese Pizza
 
 ## 4. 运行截图 + 图注
 
-<img width="453" height="284" alt="ab9cb6418733df13d36cc1481e36179f" src="https://github.com/user-attachments/assets/7af6aef7-9b14-4bfa-9e63-dbbfcdf59b6f" />
+<img width="445" height="287" alt="image" src="https://github.com/user-attachments/assets/8ba632ed-df2c-4c89-a3b6-96a55bede46e" />
 
+
+**图 1 图注：**
+同样下单 `cheese`，`NYPizzaStore` 与 `ChicagoPizzaStore` 通过各自的 `create_pizza()` 创建不同具体产品；输出中“diagonal slices / square slices”的差异证明了**对象创建由子类决定**，而 `order_pizza()` 的流程保持不变。
