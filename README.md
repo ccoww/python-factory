@@ -141,9 +141,5 @@ Joel ordered a Chicago Deep Dish Cheese Pizza
 
 ## 4. 运行截图 + 图注
 
-> 请将你的终端运行截图保存到：`./docs/run-output.png`
+<img width="453" height="284" alt="ab9cb6418733df13d36cc1481e36179f" src="https://github.com/user-attachments/assets/7af6aef7-9b14-4bfa-9e63-dbbfcdf59b6f" />
 
-![运行截图：Factory Method 输出示例](./docs/run-output.png)
-
-**图 1 图注：**
-同样下单 `cheese`，`NYPizzaStore` 与 `ChicagoPizzaStore` 通过各自的 `create_pizza()` 创建不同具体产品；输出中“diagonal slices / square slices”的差异证明了**对象创建由子类决定**，而 `order_pizza()` 的流程保持不变。
