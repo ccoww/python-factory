@@ -29,44 +29,7 @@
   - `create_pizza(...)` 作为扩展点交由 `NYPizzaStore` / `ChicagoPizzaStore` 实现；
   - 同一 `pizza_type="cheese"` 在不同门店返回不同具体产品，体现“创建延迟到子类”。
 
-### 1.5 Mermaid 简易类图
 
-```mermaid
-classDiagram
-    class Pizza {
-      <<abstract>>
-      +name: str
-      +prepare()
-      +bake()
-      +cut()
-      +box()
-    }
-
-    class NYStyleCheesePizza
-    class ChicagoStyleCheesePizza
-
-    Pizza <|-- NYStyleCheesePizza
-    Pizza <|-- ChicagoStyleCheesePizza
-
-    class PizzaStore {
-      <<abstract>>
-      +order_pizza(pizza_type) Pizza
-      +create_pizza(pizza_type) Pizza*
-    }
-
-    class NYPizzaStore {
-      +create_pizza(pizza_type) Pizza
-    }
-    class ChicagoPizzaStore {
-      +create_pizza(pizza_type) Pizza
-    }
-
-    PizzaStore <|-- NYPizzaStore
-    PizzaStore <|-- ChicagoPizzaStore
-    PizzaStore ..> Pizza : creates
-```
-
----
 
 ## 2. 示例故事与代码映射
 
